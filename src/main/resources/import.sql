@@ -1,0 +1,1 @@
+INSERT INTO Users (email, hashedPassword, role, createdAt) VALUES ('rodrigo.quelhas@ubi.pt', '1234', 'admin', '1986-06-26');
