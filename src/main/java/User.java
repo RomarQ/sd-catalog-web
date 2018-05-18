@@ -41,7 +41,6 @@ public class User implements Serializable {
     private String role;
 
     @Column(name = "createdAt")
-    @Temporal(TemporalType.TIMESTAMP)
     private DateTime createdAt;
 
     public int getUserId() {
