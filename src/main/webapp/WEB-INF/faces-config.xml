@@ -1,9 +1,24 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <faces-config
-    version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
-    http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
+    <application>
+        <resource-bundle>
+            <base-name>messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+        <message-bundle>ValidationMessages</message-bundle>
+        <!-- This supports resources referenced from within css files e.g. url(../fonts/glyphicons) -->
+        <resource-handler>org.omnifaces.resourcehandler.UnmappedResourceHandler</resource-handler>
+    </application>
+
+    <factory>
+        <exception-handler-factory>
+            sd.catalog.view.CustomExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>
 
 </faces-config>
