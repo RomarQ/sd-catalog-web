@@ -6,8 +6,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter(filterName = "FilterLogin", urlPatterns = {"/pages/*"})
-public class ServletFilter implements Filter {
+@WebFilter(filterName = "LoginFilter", urlPatterns = {"/pages/categories.xhtml", "/pages/sellers.xhtml"})
+public class LoginFilter implements Filter {
 
     @Inject
     private Instance<SessionContext> sessionContext;

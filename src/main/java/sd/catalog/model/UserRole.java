@@ -3,7 +3,7 @@ package sd.catalog.model;
 public enum UserRole {
 
     ADMIN("ADMIN"),
-    USER("USER");
+    SELLER("SELLER");
 
     private String role;
 

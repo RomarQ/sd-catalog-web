@@ -42,4 +42,6 @@ public class productsMB {
     public void setSelectedProduct(Product product) {
         this.selectedProduct = product;
     }
+
+    public String getSellerName() { return selectedProduct.getUser().getFirstName(); }
 }

@@ -2,6 +2,7 @@ package sd.catalog.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +23,16 @@ public class Category extends BaseEntity<Integer> {
     @NotNull
     @Column(name = "color")
     private String color;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "createdAt", nullable = false)
+    private Date        createdAt;
+
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+    }
 
 
     public Integer getId() {

@@ -48,14 +48,20 @@
                         <div class="top-row">
                             <div class="field-wrap">
                                 <label>#{msg.name}<span class="req">*</span></label>
-                                <h:inputText label="#{msg.name}" value="#{signUpMB.user.firstName}" maxlength="100"/>
+                                <h:inputText label="#{msg.name}" value="#{signUpMB.user.firstName}" maxlength="24"/>
                             </div>
 
                             <div class="field-wrap">
                                 <label>#{msg.last_name}<span class="req">*</span></label>
                                 <h:inputText label="#{msg.last_name}" value="#{signUpMB.user.lastName}"
-                                             maxlength="100"/>
+                                             maxlength="24"/>
                             </div>
+                        </div>
+
+                        <div class="field-wrap">
+                            <label>#{msg.phone}<span class="req">*</span></label>
+                            <h:inputText label="#{msg.phone}" value="#{signUpMB.user.phone}"
+                                         maxlength="24"/>
                         </div>
 
                         <div class="field-wrap">
@@ -67,7 +73,7 @@
                         <div class="field-wrap">
                             <label>#{msg.password}<span class="req">*</span></label>
                             <h:inputSecret label="#{msg.password}" value="#{signUpMB.user.password}"
-                                           a:autocomplete="new-password" maxlength="70"/>
+                                           a:autocomplete="new-password" maxlength="24"/>
                         </div>
 
                         <p:commandButton value="#{msg.signup}" actionListener="#{signUpMB.createAccount}"

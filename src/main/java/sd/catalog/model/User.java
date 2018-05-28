@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -29,6 +31,11 @@ public class User extends BaseEntity<Integer> {
     private String lastName;
 
     @NotNull
+    @Column(name = "phone")
+    @Pattern(regexp = "^[0-9+]*$")
+    private String phone;
+
+    @NotNull
     @Column(name = "password")
     @Convert(converter = PasswordEncryptConverter.class)
     private String password;
@@ -36,7 +43,17 @@ public class User extends BaseEntity<Integer> {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private UserRole role = UserRole.USER;
+    private UserRole role = UserRole.SELLER;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "createdAt", nullable = false)
+    private Date createdAt;
+
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+    }
 
 
     public Integer getId() {
@@ -84,9 +101,22 @@ public class User extends BaseEntity<Integer> {
     }
 
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+
     public UserRole getRole() { return role; }
 
-    public void setRole( UserRole role ) { this.role = role; }
+    public void setRole(UserRole role) { this.role = role; }
+
+    public Date getCreatedAt() { return createdAt; }
+
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
 
     @Override

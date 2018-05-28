@@ -4,7 +4,9 @@ CREATE TABLE users (
   password   VARCHAR(24)  NOT NULL,
   first_name VARCHAR(24)  NOT NULL,
   last_name  VARCHAR(24)  NOT NULL,
+  phone      VARCHAR(24)  NOT NULL,
   role       VARCHAR(24)  NOT NULL,
+  createdAt  TIMESTAMP    NOT NULL,
   CONSTRAINT users_pkey PRIMARY KEY (id),
   CONSTRAINT users_email_uk UNIQUE (email)
 );
@@ -13,7 +15,8 @@ CREATE TABLE categories (
   id          INT4        NOT NULL,
   name        VARCHAR(32) NOT NULL,
   description TEXT        NULL,
-  color       VARCHAR(50) DEFAULT '#ffffff' NOT NULL,
+  color       VARCHAR(24) DEFAULT '#ffffff' NOT NULL,
+  createdAt   TIMESTAMP   NOT NULL,
   CONSTRAINT category_pkey PRIMARY KEY (id),
   CONSTRAINT category_name UNIQUE (name)
 );
@@ -25,6 +28,7 @@ CREATE TABLE products (
   quantity    INT         NOT NULL,
   seller_id   INT4        NOT NULL,
   category_id INT4        NOT NULL,
+  createdAt   TIMESTAMP   NOT NULL,
   CONSTRAINT product_pkey PRIMARY KEY (id)
 );
 

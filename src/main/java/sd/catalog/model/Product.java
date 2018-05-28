@@ -3,6 +3,7 @@ package sd.catalog.model;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +28,10 @@ public class Product extends BaseEntity<Integer> {
     @Min(0)
     private int         quantity;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "createdAt", nullable = false)
+    private Date        createdAt;
+
     @JoinColumn(name = "seller_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private User        seller;
@@ -34,6 +39,12 @@ public class Product extends BaseEntity<Integer> {
     @JoinColumn(name = "category_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Category    category;
+
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+    }
 
 
     public Integer getId() {
@@ -70,6 +81,11 @@ public class Product extends BaseEntity<Integer> {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+
+    public Date getCreatedAt() { return createdAt; }
+
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
 
     public User getUser() {
