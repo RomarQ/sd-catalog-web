@@ -80,7 +80,7 @@ public class ProductsMB {
 
         User user = sessionContext.getActiveUser();
 
-        if (!(user.getRole().equals(UserRole.ADMIN) || user.getId() != p.getSeller().getId())) {
+        if (!(user.getRole().equals(UserRole.ADMIN) || user.getId() == p.getSeller().getId())) {
             FacesUtils.addInfoMessage("You don't have permissions to update this product!");
             return;
         }

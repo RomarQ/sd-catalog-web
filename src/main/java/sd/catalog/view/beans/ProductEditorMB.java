@@ -4,8 +4,6 @@ import sd.catalog.SessionContext;
 import sd.catalog.model.Category;
 import sd.catalog.model.Product;
 import sd.catalog.repository.CategoryRepository;
-import sd.catalog.repository.ProductRepository;
-import sd.catalog.service.ProductService;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
