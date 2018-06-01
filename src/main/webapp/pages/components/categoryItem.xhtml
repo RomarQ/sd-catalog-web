@@ -1,0 +1,39 @@
+<ui:composition
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:of="http://omnifaces.org/functions">
+
+    <li data-id="#{cat.id}" class="flex-item" >
+        <ul class="list-group">
+            <li class="list-group-item" style="background: #{cat.color};">
+                #{cat.name}
+            </li>
+            <li class="list-group-item" >
+                #{cat.description}
+            </li>
+            <li class="list-group-item">
+                #{categoriesMB.totalProducts(cat)} Products
+            </li>
+            <li class="list-group-item">
+                <h:outputText value="#{of:formatDate(cat.createdAt, 'dd.MM.yyyy - HH:mm')}" />
+            </li>
+            <li class="list-group-item">
+
+                <h:commandLink style="float: left;" action="#{categoryProductsMB.showResult}">
+                    <span class="glyphicon glyphicon-eye-open" title="#{msg.showProducts}"/>
+                    <f:param name = "categoryId" value="#{cat.id}" />
+                </h:commandLink>
+
+                <h:panelGroup rendered="#{profileMB.user.role eq 'ADMIN'}">
+                    <h:commandLink style="float: right;">
+                        <span class="glyphicon glyphicon-edit" title="#{msg.edit}"/>
+                        <f:ajax event="click" listener="#{categoryEditorMB.editCategory(cat)}" onevent="openCategoryEditor"
+                                render=":formCategoryModal"/>
+                    </h:commandLink>
+                </h:panelGroup>
+            </li>
+        </ul>
+    </li>
+
+</ui:composition>

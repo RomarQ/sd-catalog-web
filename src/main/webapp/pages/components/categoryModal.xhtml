@@ -1,0 +1,56 @@
+<ui:composition
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns="http://www.w3.org/1999/xhtml">
+
+    <div class="modal fade" id="categoryModal" role="dialog">
+        <div class="modal-dialog">
+            <h:form id="formCategoryModal">
+                <div class="modal-content">
+                    <div id="modal-header" class="modal-header"
+                         style="background-color: #{categoryEditorMB.category.color}">
+                        <button type="button" class="close" data-dismiss="modal"/>
+                        <h4 class="modal-title">#{msg.newOrEdit}</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title">#{msg.name}:</label>
+                            <h:inputText label="#{msg.name}" value="#{categoryEditorMB.category.name}"
+                                         class="form-control" id="title" maxlength="100"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">#{msg.description}:</label>
+                            <h:inputTextarea label="#{msg.description}" value="#{categoryEditorMB.category.description}"
+                                             class="form-control" id="description" a:maxlength="4000"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color">#{msg.color}:</label>
+                            <h:inputText value="#{categoryEditorMB.category.color}" class="form-control" id="color"/>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <h:commandButton style="float: left" value="#{msg.remove}" styleClass="btn btn-danger" data-dismiss="modal"
+                                         rendered="#{categoryEditorMB.category.id != null}">
+                            <f:ajax listener="#{categoriesMB.removeCategory(categoryEditorMB.category)}"
+                                    execute="@form"
+                                    render="@form :formCategories" onevent="closeCategoryEditor"/>
+                        </h:commandButton>
+                        <h:commandButton value="#{msg.save}" styleClass="btn btn-default" data-dismiss="modal">
+                            <f:ajax listener="#{categoriesMB.saveCategory(categoryEditorMB.category)}"
+                                    execute="@form"
+                                    render="@form :formCategories" />
+                        </h:commandButton>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">#{msg.close}</button>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </div>
+
+
+</ui:composition>

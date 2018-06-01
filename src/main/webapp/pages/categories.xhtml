@@ -4,8 +4,26 @@
         xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:p="http://primefaces.org/ui">
 
-    <div class="container" style="background: #6bf442">
-        <p>Categories</p>
+    <div class="container">
+        <h:form id="formCategories">
+            <ul id="categories" data-stage="Categories" class="flex-container">
+
+                <ui:repeat value="#{categoriesMB.categories}" var="cat">
+                    <ui:include src="/pages/components/categoryItem.xhtml"/>
+                </ui:repeat>
+
+                <h:panelGroup rendered="#{profileMB.user.role eq 'ADMIN'}">
+                    <li class="flex-item add" >
+                        <h:commandLink >
+                            <span class="glyphicon glyphicon-plus"/>
+                            <f:ajax event="click" listener="#{categoryEditorMB.createCategory}" onevent="openCategoryEditor"
+                                    render=":formCategoryModal"/>
+                        </h:commandLink>
+                    </li>
+                </h:panelGroup>
+
+            </ul>
+        </h:form>
     </div>
 
 </ui:composition>

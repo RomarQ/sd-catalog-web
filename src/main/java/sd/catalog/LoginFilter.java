@@ -6,7 +6,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter(filterName = "LoginFilter", urlPatterns = {"/pages/categories.xhtml", "/pages/sellers.xhtml"})
+@WebFilter(filterName = "LoginFilter", urlPatterns = {"/pages/categories.xhtml", "/pages/users.xhtml", "/pages/sellers.xhtml"})
 public class LoginFilter implements Filter {
 
     @Inject

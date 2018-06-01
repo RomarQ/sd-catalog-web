@@ -1,3 +1,4 @@
+
 package sd.catalog;
 
 import sd.catalog.model.User;
@@ -8,7 +9,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter(filterName = "LoggedInFilter", urlPatterns = {"/login.xhtml"})
+@WebFilter(filterName = "LoggedInFilter", urlPatterns = "/login.xhtml")
 public class LoggedInFilter implements Filter {
 
     @Inject
@@ -23,7 +24,7 @@ public class LoggedInFilter implements Filter {
         User user = sessionContext.get().getActiveUser();
 
         if (user != null)
-            request.getRequestDispatcher("/pages/index.xhtml").forward(request, response);
+            request.getRequestDispatcher("/").forward(request, response);
         else
             chain.doFilter(request, response);
 

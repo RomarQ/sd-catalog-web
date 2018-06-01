@@ -28,6 +28,7 @@ CREATE TABLE products (
   quantity    INT         NOT NULL,
   seller_id   INT4        NOT NULL,
   category_id INT4        NOT NULL,
+  updatedAt   TIMESTAMP   NOT NULL,
   createdAt   TIMESTAMP   NOT NULL,
   CONSTRAINT product_pkey PRIMARY KEY (id)
 );

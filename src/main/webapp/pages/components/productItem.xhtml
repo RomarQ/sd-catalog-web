@@ -2,17 +2,47 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
         xmlns:f="http://xmlns.jcp.org/jsf/core"
-        xmlns:h="http://xmlns.jcp.org/jsf/html">
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:of="http://omnifaces.org/functions">
 
     <li data-id="#{prod.id}" class="flex-item">
         <ul class="list-group">
-            <li class="list-group-item" style="font-size: 12px; color: #000000;"> #{prod.name}</li>
-            <li class="list-group-item" style="font-size: 12px; color: #000000;">Price: #{prod.price}</li>
-            <li class="list-group-item" style="font-size: 12px; color: #000000;">Quantity: #{prod.quantity}</li>
-            <li class="btn-group">
-
-                <p:commandButton value="Buy" class="btn btn-default" update="growl" />
-
+            <li class="list-group-item">
+                #{prod.name}
+            </li>
+            <li class="list-group-item" style="background: #{prod.category.color};">
+                #{prod.category.name}
+            </li>
+            <li class="list-group-item">
+                <label style="color: #1b6d85">Seller</label>
+                <br/>
+                #{prod.seller.firstName} #{prod.seller.lastName}
+            </li>
+            <li class="list-group-item">
+                <label style="color: #1b6d85">Price: </label>
+                <br/>
+                #{prod.price} €
+            </li>
+            <li class="list-group-item">
+                <label style="color: #1b6d85">Quantity</label>
+                <br/>
+                <h:outputText value=" #{prod.quantity}" rendered="#{prod.quantity ne 0}"/>
+                <h:outputText value=" Not in Stock" style="color: darkred;" rendered="#{prod.quantity eq 0}"/>
+            </li>
+            <li class="list-group-item">
+                <label style="color: #1b6d85">Last Update</label>
+                <br/>
+                <h:outputText value="#{of:formatDate(prod.updatedAt, 'dd.MM.yyyy - HH:mm')}" />
+            </li>
+            <li class="list-group-item">
+                <h:commandLink style="float: left;">
+                    <span class="glyphicon glyphicon-shopping-cart" title="#{msg.buy}"/>
+                </h:commandLink>
+                <h:commandLink style="float: right;" rendered="#{profileMB.user.role eq 'ADMIN' or profileMB.user.id eq prod.seller.id}">
+                    <span class="glyphicon glyphicon-edit" title="#{msg.edit}"/>
+                    <f:ajax event="click" listener="#{productEditorMB.editProduct(prod)}" onevent="openProductEditor"
+                            render=":formProductModal"/>
+                </h:commandLink>
             </li>
         </ul>
     </li>

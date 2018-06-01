@@ -1,0 +1,17 @@
+<ui:composition
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <li data-id="#{user.id}" class="flex-item">
+        <ul class="list-group">
+            <li class="list-group-item" style="font-size: 12px; color: #000000;">#{user.firstName} #{user.lastName}</li>
+            <li class="list-group-item" style="font-size: 12px; color: #000000;">#{user.email}</li>
+            <li class="list-group-item" style="font-size: 12px; color: #000000;">#{user.phone}</li>
+            <li class="list-group-item" style="font-size: 12px; color: #000000;">#{user.role}</li>
+            <li class="list-group-item" style="font-size: 12px; color: #000000;">#{user.createdAt}</li>
+        </ul>
+    </li>
+
+</ui:composition>

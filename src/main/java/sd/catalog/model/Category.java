@@ -1,6 +1,14 @@
 package sd.catalog.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.PrePersist;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Objects;
@@ -17,7 +25,7 @@ public class Category extends BaseEntity<Integer> {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "discription")
+    @Column(name = "description")
     private String description;
 
     @NotNull
@@ -26,7 +34,7 @@ public class Category extends BaseEntity<Integer> {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdAt", nullable = false)
-    private Date        createdAt;
+    private Date   createdAt;
 
 
     @PrePersist
@@ -70,8 +78,15 @@ public class Category extends BaseEntity<Integer> {
         this.color = color;
     }
 
+
+    public Date getCreatedAt() { return createdAt; }
+
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+
+
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Category && Objects.equals(id, ((Category) obj).id);
     }
+
 }

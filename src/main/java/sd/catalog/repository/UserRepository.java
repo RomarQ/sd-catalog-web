@@ -31,4 +31,24 @@ public class UserRepository extends BaseRepository<User> {
 
         return list.get(0);
     }
+
+    public List<User> findAll() {
+
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+
+        Root<User> root = cq.from(User.class);
+
+        cq.orderBy(cb.asc(root.get(User_.role)));
+
+        TypedQuery<User> query = getEntityManager().createQuery(cq);
+
+        List<User> list = query.getResultList();
+
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+
+        return list;
+    }
 }

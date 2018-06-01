@@ -11,5 +11,4 @@ public abstract class BaseEntity<PK> {
         return Objects.hashCode(getId());
     }
 
-
 }

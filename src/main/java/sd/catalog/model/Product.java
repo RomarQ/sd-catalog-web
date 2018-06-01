@@ -32,6 +32,10 @@ public class Product extends BaseEntity<Integer> {
     @Column(name = "createdAt", nullable = false)
     private Date        createdAt;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updatedAt", nullable = false)
+    private Date        updatedAt;
+
     @JoinColumn(name = "seller_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private User        seller;
@@ -43,7 +47,12 @@ public class Product extends BaseEntity<Integer> {
 
     @PrePersist
     protected void onCreate() {
-        createdAt = new Date();
+        updatedAt = createdAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
     }
 
 
@@ -87,12 +96,15 @@ public class Product extends BaseEntity<Integer> {
 
     public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
+    public Date getUpdatedAt() { return updatedAt; }
 
-    public User getUser() {
+    public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
+
+    public User getSeller() {
         return seller;
     }
 
-    public void setUser(User seller) {
+    public void setSeller(User seller) {
         this.seller = seller;
     }
 

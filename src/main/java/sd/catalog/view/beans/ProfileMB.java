@@ -5,32 +5,31 @@ import sd.catalog.model.User;
 import sd.catalog.service.UserService;
 import sd.catalog.view.utils.FacesUtils;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
-
-
 
 @ManagedBean
 @ViewScoped
-public class loginMB {
+public class ProfileMB {
 
     @Inject
-    UserService userService;
+    private UserService userService;
 
     @Inject
-    SessionContext sessionContext;
+    private SessionContext sessionContext;
 
-    User user = new User();
+    private User user;
 
-    public void login() {
+    @PostConstruct
+    public void init() { user = sessionContext.getActiveUser(); }
 
-        User auth_user = userService.authenticate(user.getEmail() , user.getPassword());
+    public void updateProfile() {
 
-        sessionContext.setActiveUser(auth_user);
+        userService.update(user);
 
-        FacesUtils.reloadPage();
+        FacesUtils.addMessageSaveSuccess();
 
     }
 
@@ -42,8 +41,7 @@ public class loginMB {
         this.user = user;
     }
 
-    public void buttonAction(ActionEvent actionEvent) {
-
+    public String getFullName() {
+        return user.getFirstName() + " " + user.getLastName();
     }
-
 }
