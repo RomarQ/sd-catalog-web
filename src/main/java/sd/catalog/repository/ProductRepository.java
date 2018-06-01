@@ -1,6 +1,7 @@
 package sd.catalog.repository;
 
 import sd.catalog.model.Category;
+import sd.catalog.model.User;
 import sd.catalog.model.Product;
 import sd.catalog.model.Product_;
 
@@ -38,6 +39,19 @@ public class ProductRepository extends BaseRepository<Product> {
         return query.getResultList();
     }
 
+    public List<Product> findByUser(User user) {
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Product> cq = cb.createQuery(Product.class);
+
+        Root<Product> root = cq.from(Product.class);
+
+        cq.where(cb.equal(root.get(Product_.seller), user));
+
+        TypedQuery<Product> query = getEntityManager().createQuery(cq);
+
+        return query.getResultList();
+    }
+
     public Product findById(Integer id) {
         return getEntityManager().find(Product.class, id);
     }
@@ -48,6 +62,15 @@ public class ProductRepository extends BaseRepository<Product> {
 
         for(Product p : list)
             this.remove(p);
+    }
+
+    public void removeByUser(User u) {
+
+        List<Product> list = findByUser(u);
+
+        for(Product p : list)
+            this.remove(p);
+
     }
 
 }

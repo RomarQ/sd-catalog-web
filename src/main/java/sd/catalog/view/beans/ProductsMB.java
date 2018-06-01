@@ -1,7 +1,10 @@
 package sd.catalog.view.beans;
 
+import sd.catalog.SessionContext;
 import sd.catalog.model.Category;
 import sd.catalog.model.Product;
+import sd.catalog.model.User;
+import sd.catalog.model.UserRole;
 import sd.catalog.repository.CategoryRepository;
 import sd.catalog.repository.ProductRepository;
 import sd.catalog.service.CategoryService;
@@ -20,6 +23,9 @@ import java.util.List;
 @ManagedBean
 @ViewScoped
 public class ProductsMB {
+
+    @Inject
+    private SessionContext sessionContext;
 
     @Inject
     private ProductRepository productRepository;
@@ -41,18 +47,43 @@ public class ProductsMB {
         products = productRepository.findProducts();
     }
 
-    public List<Product> getProducts() {
-        loadProducts();
+    public void loadProductsByCategory(Category c) { products = productRepository.findByCategory(c); }
+
+    public List<Product> getProducts(String cat) {
+
+        if(cat.equalsIgnoreCase("All"))
+            loadProducts();
+        else {
+            Category category = categoryRepository.findByName(cat);
+            loadProductsByCategory(category);
+        }
         return products;
     }
 
     public void removeProduct(Product p) {
+
+        User user = sessionContext.getActiveUser();
+
+        if (!(user.getRole().equals(UserRole.ADMIN) || user.getId() != p.getSeller().getId())) {
+            FacesUtils.addInfoMessage("You don't have permissions to remove this product!");
+            return;
+        }
+
         productService.remove(p);
 
         loadProducts();
+
+        FacesUtils.addMessageSuccess("Product "+p.getName()+" was successfully removed!");
     }
 
     public void saveProduct(Product p) {
+
+        User user = sessionContext.getActiveUser();
+
+        if (!(user.getRole().equals(UserRole.ADMIN) || user.getId() != p.getSeller().getId())) {
+            FacesUtils.addInfoMessage("You don't have permissions to update this product!");
+            return;
+        }
 
         if (p.getId() == null)
             productService.persist(p);

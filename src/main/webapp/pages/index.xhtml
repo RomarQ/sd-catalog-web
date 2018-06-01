@@ -22,15 +22,15 @@
                         <li class="active">
                             <a data-toggle="pill" href="#home">Home</a>
                         </li>
-                        <li>
-                            <a data-toggle="pill" href="#categories">Categories</a>
-                        </li>
                         <h:panelGroup rendered="#{profileMB.user.role eq 'SELLER'}">
                             <li>
                                 <a data-toggle="pill" href="#myproducts">My Products</a>
                             </li>
                         </h:panelGroup>
                         <h:panelGroup rendered="#{profileMB.user.role eq 'ADMIN'}">
+                            <li>
+                                <a data-toggle="pill" href="#categories">Categories</a>
+                            </li>
                             <li>
                                 <a data-toggle="pill" href="#sellers">Sellers</a>
                             </li>
@@ -66,10 +66,10 @@
             <div id="home" class="tab-pane fade in active">
                 <ui:include src="/pages/products.xhtml"/>
             </div>
-            <div id="categories" class="tab-pane fade in">
-                <ui:include src="/pages/categories.xhtml"/>
-            </div>
             <h:panelGroup rendered="#{profileMB.user.role eq 'ADMIN'}">
+                <div id="categories" class="tab-pane fade in">
+                    <ui:include src="/pages/categories.xhtml"/>
+                </div>
                 <div id="sellers" class="tab-pane fade in">
                     <ui:include src="/pages/users.xhtml"/>
                 </div>
@@ -78,9 +78,11 @@
 
         <ui:include src="/pages/components/categoryModal.xhtml"/>
         <ui:include src="/pages/components/productModal.xhtml"/>
+        <ui:include src="/pages/components/userModal.xhtml"/>
+        <ui:include src="/pages/components/sellerInfoModal.xhtml"/>
 
     </ui:define>
 
-    <script type="text/javascript" src="js/default.js"/>
+    <script type="text/javascript" src="js/modalFuncs.js"/>
 
 </ui:composition>

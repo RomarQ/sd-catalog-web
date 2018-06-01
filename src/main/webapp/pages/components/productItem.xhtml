@@ -19,7 +19,7 @@
                 #{prod.seller.firstName} #{prod.seller.lastName}
             </li>
             <li class="list-group-item">
-                <label style="color: #1b6d85">Price: </label>
+                <label style="color: #1b6d85">Price</label>
                 <br/>
                 #{prod.price} €
             </li>
@@ -37,6 +37,8 @@
             <li class="list-group-item">
                 <h:commandLink style="float: left;">
                     <span class="glyphicon glyphicon-shopping-cart" title="#{msg.buy}"/>
+                    <f:ajax event="click" listener="#{productEditorMB.editProduct(prod)}" onevent="openSellerInfo"
+                            render=":formSellerInfoModal"/>
                 </h:commandLink>
                 <h:commandLink style="float: right;" rendered="#{profileMB.user.role eq 'ADMIN' or profileMB.user.id eq prod.seller.id}">
                     <span class="glyphicon glyphicon-edit" title="#{msg.edit}"/>

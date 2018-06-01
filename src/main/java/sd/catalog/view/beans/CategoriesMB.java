@@ -65,13 +65,16 @@ public class CategoriesMB {
         return categories;
     }
 
-    public List<String> getCategoryNames() {
+    public List<String> getCategoryNames(boolean modal) {
 
         List<Category> categories = getCategories();
 
-        if( categories == null ) return null;
-
         List<String> list = new ArrayList<>();
+
+        if (!modal)
+            list.add(0, "All");
+
+        if( categories == null ) return list;
 
         for(Category c : getCategories()) {
             list.add(c.getName());

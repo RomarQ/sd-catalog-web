@@ -6,9 +6,21 @@
 
     <div class="container">
         <h:form id="formProducts">
+
+            <div class="form-group">
+                <label for="category">#{msg.category}</label>
+                <br/>
+                <h:selectOneMenu value="#{categoryProductsMB.category}" class="form-control form-control-lg" id="category">
+                    <f:selectItems value="#{categoriesMB.getCategoryNames(false)}" />
+                </h:selectOneMenu>
+                <h:commandButton value="#{msg.filterCategory}" styleClass="btn btn-default">
+                    <f:ajax execute="@form" render="@form :formProducts" />
+                </h:commandButton>
+            </div>
+
             <ul id="products" data-stage="Products" class="flex-container">
 
-                <ui:repeat value="#{productsMB.products}" var="prod">
+                <ui:repeat value="#{productsMB.getProducts(categoryProductsMB.category)}" var="prod">
                     <ui:include src="/pages/components/productItem.xhtml"/>
                 </ui:repeat>
 

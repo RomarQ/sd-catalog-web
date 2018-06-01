@@ -11,6 +11,10 @@ public class FacesUtils {
         addInfoMessage("Saved!");
     }
 
+    public static void addMessageSuccess(String message) {
+        addInfoMessage(message);
+    }
+
     public static void addInfoMessage(String message) {
         FacesMessage infoMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
         FacesContext.getCurrentInstance().addMessage(message, infoMessage);

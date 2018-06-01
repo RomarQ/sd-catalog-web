@@ -16,6 +16,28 @@ function openProductEditor(data) {
 }
 
 // Closes Product Modal after deleting it
-function closeProductEditor(data) {
+function closeProductEditor() {
     $('#productModal').modal("hide");
+}
+
+// Shows User Modal that allows to update user information
+function openUserEditor(data) {
+    if ( data.status === 'success' )
+        $('#userModal').modal();
+}
+
+// Closes User Modal after deleting it
+function closeUserEditor() {
+    $('#userModal').modal("hide");
+}
+
+// Shows Seller Info Modal
+function openSellerInfo(data) {
+    if ( data.status === 'success' )
+        $('#sellerInfoModal').modal();
+}
+
+// Closes User Seller Info
+function closeSellerInfo() {
+    $('#sellerInfoModal').modal("hide");
 }

@@ -1,7 +1,9 @@
 package sd.catalog.service;
 
 import sd.catalog.customExeception.CustomMessageException;
+import sd.catalog.model.Product;
 import sd.catalog.model.User;
+import sd.catalog.repository.ProductRepository;
 import sd.catalog.repository.UserRepository;
 
 import javax.inject.Inject;
@@ -12,6 +14,9 @@ public class UserService {
     @Inject
     private UserRepository userRepository;
 
+    @Inject
+    private ProductRepository productRepository;
+
     @Transactional
     public void persist(User user) {
         if (userRepository.findByEmail(user.getEmail()) != null) {
@@ -19,6 +24,12 @@ public class UserService {
         }
 
         userRepository.persist(user);
+    }
+
+    @Transactional
+    public void remove(User u) {
+        productRepository.removeByUser(u);
+        userRepository.remove(u);
     }
 
     @Transactional

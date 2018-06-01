@@ -40,8 +40,4 @@ public class LoginMB {
         this.user = user;
     }
 
-    public void buttonAction(ActionEvent actionEvent) {
-
-    }
-
 }

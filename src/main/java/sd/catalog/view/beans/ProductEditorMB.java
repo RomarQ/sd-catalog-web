@@ -19,14 +19,7 @@ public class ProductEditorMB {
     private SessionContext sessionContext;
 
     @Inject
-    private ProductRepository productRepository;
-
-    @Inject
     private CategoryRepository categoryRepository;
-
-    @Inject
-    private ProductService productService;
-
 
     private Product product;
 

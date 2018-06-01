@@ -39,7 +39,7 @@
                             <label for="category">#{msg.category}:</label>
                             <br/>
                             <h:selectOneMenu value="#{productEditorMB.category}" class="form-control" id="category">
-                                <f:selectItems value="#{categoriesMB.categoryNames}" />
+                                <f:selectItems value="#{categoriesMB.getCategoryNames(true)}" />
                             </h:selectOneMenu>
                         </div>
                     </div>

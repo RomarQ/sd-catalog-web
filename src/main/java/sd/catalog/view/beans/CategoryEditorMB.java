@@ -1,26 +1,13 @@
 package sd.catalog.view.beans;
 
-import sd.catalog.SessionContext;
 import sd.catalog.model.Category;
-import sd.catalog.repository.CategoryRepository;
-import sd.catalog.service.CategoryService;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
 
 @ManagedBean
 @ViewScoped
 public class CategoryEditorMB {
-
-    @Inject
-    private SessionContext sessionContext;
-
-    @Inject
-    private CategoryRepository categoryRepository;
-
-    @Inject
-    private CategoryService categoryService;
 
     private Category category;
 
