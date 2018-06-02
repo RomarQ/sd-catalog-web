@@ -1,9 +1,10 @@
 package sd.catalog.view.beans;
 
-import sd.catalog.SessionContext;
+import sd.catalog.SessionBeanEJB;
 import sd.catalog.model.Category;
 import sd.catalog.model.Product;
 import sd.catalog.repository.CategoryRepository;
+import sd.catalog.view.utils.FacesUtils;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -14,7 +15,7 @@ import javax.inject.Inject;
 public class ProductEditorMB {
 
     @Inject
-    private SessionContext sessionContext;
+    private SessionBeanEJB sessionBean;
 
     @Inject
     private CategoryRepository categoryRepository;
@@ -23,7 +24,7 @@ public class ProductEditorMB {
 
     public void createProduct() {
         product = new Product();
-        product.setSeller(sessionContext.getActiveUser());
+        product.setSeller(sessionBean.getActiveUser());
         product.setName("");
         product.setQuantity(0);
         product.setPrice(0);
@@ -37,6 +38,7 @@ public class ProductEditorMB {
 
     public void setProduct(Product p) {
         product = p;
+        FacesUtils.reloadPage();
     }
 
     public String getCategory() {

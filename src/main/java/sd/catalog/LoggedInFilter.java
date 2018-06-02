@@ -1,4 +1,3 @@
-
 package sd.catalog;
 
 import sd.catalog.model.User;
@@ -13,7 +12,7 @@ import java.io.IOException;
 public class LoggedInFilter implements Filter {
 
     @Inject
-    private Instance<SessionContext> sessionContext;
+    private Instance<SessionBeanEJB> sessionContext;
 
     @Override
     public void init(FilterConfig fc) throws ServletException {}

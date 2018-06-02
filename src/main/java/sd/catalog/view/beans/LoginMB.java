@@ -1,13 +1,12 @@
 package sd.catalog.view.beans;
 
-import sd.catalog.SessionContext;
+import sd.catalog.SessionBeanEJB;
 import sd.catalog.model.User;
 import sd.catalog.service.UserService;
 import sd.catalog.view.utils.FacesUtils;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 @ManagedBean
@@ -15,10 +14,10 @@ import javax.inject.Inject;
 public class LoginMB {
 
     @Inject
-    UserService userService;
+    private SessionBeanEJB sessionBean;
 
     @Inject
-    SessionContext sessionContext;
+    UserService userService;
 
     User user = new User();
 
@@ -26,7 +25,7 @@ public class LoginMB {
 
         User auth_user = userService.authenticate(user.getEmail() , user.getPassword());
 
-        sessionContext.setActiveUser(auth_user);
+        sessionBean.setActiveUser(auth_user);
 
         FacesUtils.reloadPage();
 

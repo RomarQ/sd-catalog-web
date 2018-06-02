@@ -1,6 +1,6 @@
 package sd.catalog.view.beans;
 
-import sd.catalog.SessionContext;
+import sd.catalog.SessionBeanEJB;
 import sd.catalog.model.User;
 import sd.catalog.service.UserService;
 import sd.catalog.view.utils.FacesUtils;
@@ -15,15 +15,15 @@ import javax.inject.Inject;
 public class ProfileMB {
 
     @Inject
-    private UserService userService;
+    private SessionBeanEJB sessionBean;
 
     @Inject
-    private SessionContext sessionContext;
+    private UserService userService;
 
     private User user;
 
     @PostConstruct
-    public void init() { user = sessionContext.getActiveUser(); }
+    public void init() { user = sessionBean.getActiveUser(); }
 
     public void updateProfile() {
 

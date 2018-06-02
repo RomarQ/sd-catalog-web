@@ -1,6 +1,7 @@
 package sd.catalog.view.beans;
 
-import sd.catalog.SessionContext;
+import sd.catalog.SessionBeanEJB;
+import sd.catalog.customExeception.CustomMessageException;
 import sd.catalog.model.User;
 import sd.catalog.model.UserRole;
 import sd.catalog.repository.UserRepository;
@@ -21,13 +22,13 @@ import java.util.List;
 public class UsersMB {
 
     @Inject
+    private SessionBeanEJB sessionBean;
+
+    @Inject
     private UserRepository userRepository;
 
     @Inject
     private UserService userService;
-
-    @Inject
-    private SessionContext sessionContext;
 
     private List<User> users;
 
@@ -45,10 +46,8 @@ public class UsersMB {
 
     public void removeUser(User u) {
 
-        if (!sessionContext.getActiveUser().getRole().equals(UserRole.ADMIN)) {
-            FacesUtils.addInfoMessage("You don't have permissions to delete this user!");
-            return;
-        }
+        if (!sessionBean.getActiveUser().getRole().equals(UserRole.ADMIN))
+            throw new CustomMessageException("You don't have permissions to delete this user!");
 
         userService.remove(u);
 

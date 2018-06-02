@@ -48,12 +48,12 @@
                                          rendered="#{productEditorMB.product.id != null}">
                             <f:ajax listener="#{productsMB.removeProduct(productEditorMB.product)}"
                                     execute="@form"
-                                    render="@form :formProducts" onevent="closeProductEditor"/>
+                                    render="@form :formProducts :formMyProducts" onevent="closeProductEditor"/>
                         </h:commandButton>
-                        <h:commandButton value="#{msg.save}" styleClass="btn btn-default" data-dismiss="modal">
+                        <h:commandButton value="#{msg.save}" styleClass="btn btn-default" update="growl" data-dismiss="modal">
                             <f:ajax listener="#{productsMB.saveProduct(productEditorMB.product)}"
                                     execute="@form"
-                                    render="@form :formProducts" />
+                                    render="@form :formProducts :formMyProducts" />
                         </h:commandButton>
                         <button type="button" class="btn btn-default" data-dismiss="modal">#{msg.close}</button>
                     </div>

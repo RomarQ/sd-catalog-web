@@ -13,7 +13,7 @@ import java.io.IOException;
 public class AdminFilter implements Filter {
 
     @Inject
-    private Instance<SessionContext> sessionContext;
+    private Instance<SessionBeanEJB> sessionContext;
 
     @Override
     public void init(FilterConfig fc) throws ServletException {}

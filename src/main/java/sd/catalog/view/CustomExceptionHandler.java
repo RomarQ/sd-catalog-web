@@ -10,6 +10,7 @@ import javax.faces.event.ExceptionQueuedEventContext;
 import java.util.Iterator;
 
 class CustomExceptionHandler extends ExceptionHandlerWrapper {
+
     private ExceptionHandler wrapped;
 
     CustomExceptionHandler(ExceptionHandler exception) {

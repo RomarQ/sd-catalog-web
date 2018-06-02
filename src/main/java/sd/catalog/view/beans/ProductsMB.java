@@ -1,13 +1,13 @@
 package sd.catalog.view.beans;
 
-import sd.catalog.SessionContext;
+import sd.catalog.SessionBeanEJB;
+import sd.catalog.customExeception.CustomMessageException;
 import sd.catalog.model.Category;
 import sd.catalog.model.Product;
 import sd.catalog.model.User;
 import sd.catalog.model.UserRole;
 import sd.catalog.repository.CategoryRepository;
 import sd.catalog.repository.ProductRepository;
-import sd.catalog.service.CategoryService;
 import sd.catalog.service.ProductService;
 import sd.catalog.view.utils.FacesUtils;
 
@@ -15,9 +15,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.persistence.PostLoad;
-import javax.persistence.PostRemove;
-import javax.persistence.PostUpdate;
 import java.util.List;
 
 @ManagedBean
@@ -25,7 +22,7 @@ import java.util.List;
 public class ProductsMB {
 
     @Inject
-    private SessionContext sessionContext;
+    private SessionBeanEJB sessionBean;
 
     @Inject
     private ProductRepository productRepository;
@@ -49,6 +46,8 @@ public class ProductsMB {
 
     public void loadProductsByCategory(Category c) { products = productRepository.findByCategory(c); }
 
+    public void loadMyProducts() { products = productRepository.findByUser(sessionBean.getActiveUser()); }
+
     public List<Product> getProducts(String cat) {
 
         if(cat.equalsIgnoreCase("All"))
@@ -60,14 +59,17 @@ public class ProductsMB {
         return products;
     }
 
+    public List<Product> getMyProducts() {
+       loadMyProducts();
+       return products;
+    }
+
     public void removeProduct(Product p) {
 
-        User user = sessionContext.getActiveUser();
+        User user = sessionBean.getActiveUser();
 
-        if (!(user.getRole().equals(UserRole.ADMIN) || user.getId() != p.getSeller().getId())) {
-            FacesUtils.addInfoMessage("You don't have permissions to remove this product!");
-            return;
-        }
+        if (!(user.getRole().equals(UserRole.ADMIN) || user.getId() != p.getSeller().getId()))
+            throw new CustomMessageException("You don't have permissions to remove this product!");
 
         productService.remove(p);
 
@@ -78,7 +80,7 @@ public class ProductsMB {
 
     public void saveProduct(Product p) {
 
-        User user = sessionContext.getActiveUser();
+        User user = sessionBean.getActiveUser();
 
         if (!(user.getRole().equals(UserRole.ADMIN) || user.getId() == p.getSeller().getId())) {
             FacesUtils.addInfoMessage("You don't have permissions to update this product!");

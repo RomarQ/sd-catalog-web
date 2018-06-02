@@ -1,6 +1,6 @@
 package sd.catalog.view.beans;
 
-import sd.catalog.SessionContext;
+import sd.catalog.SessionBeanEJB;
 import sd.catalog.model.User;
 import sd.catalog.service.UserService;
 import sd.catalog.view.utils.FacesUtils;
@@ -14,10 +14,10 @@ import javax.inject.Inject;
 public class SignUpMB {
 
     @Inject
-    private UserService userService;
+    private SessionBeanEJB sessionBean;
 
     @Inject
-    private SessionContext sessionContext;
+    private UserService userService;
 
     private User user = new User();
 
@@ -25,7 +25,7 @@ public class SignUpMB {
 
         userService.persist(user);
 
-        sessionContext.setActiveUser(user);
+        sessionBean.setActiveUser(user);
 
         FacesUtils.reloadPage();
 

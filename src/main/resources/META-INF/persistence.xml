@@ -9,6 +9,10 @@
 
         <jta-data-source>java:jboss/datasources/catalog</jta-data-source>
 
+        <class>sd.catalog.model.User</class>
+        <class>sd.catalog.model.Category</class>
+        <class>sd.catalog.model.Product</class>
+
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.enable_lazy_load_no_trans" value="true"/>

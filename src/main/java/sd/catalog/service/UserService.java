@@ -1,7 +1,6 @@
 package sd.catalog.service;
 
 import sd.catalog.customExeception.CustomMessageException;
-import sd.catalog.model.Product;
 import sd.catalog.model.User;
 import sd.catalog.repository.ProductRepository;
 import sd.catalog.repository.UserRepository;
