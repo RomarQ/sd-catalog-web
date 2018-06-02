@@ -1,12 +1,8 @@
-
-# sd-catalog-web
-
-[ SCHOOL PROJECT - Distributed Systems ]
+[ SCHOOL PROJECT - Distributed Systems ] [ Web App  -  Java EE ]
 
 Sample ( Can take a few seconds to load since it probably is hibernating ) 
- [Catalog sample page](https://www.postgresql.org/) 
+[Catalog sample page](https://catalog-sd.herokuapp.com) 
 
-[ Web App  -  Java EE ]
 ![Catalog](Catalog.png "Catalog")
 
 ## Features
@@ -45,10 +41,11 @@ Sample ( Can take a few seconds to load since it probably is hibernating )
 - ```mvn package```
 - ```java -jar ./target/catalog-swarm.jar``` 
 -  If you want to run in **production mode**, just add the following parameters
-```-DJDBC_DATABASE_URL=URL```
-```-DJDBC_DATABASE_USERNAME=db_username```
- ```-DJDBC_DATABASE_PASSWORD=db_password```
- ```-Sprd```
+    ```-DJDBC_DATABASE_URL=URL```
+    ```-DJDBC_DATABASE_USERNAME=db_username```
+    ```-DJDBC_DATABASE_PASSWORD=db_password```
+    ```-Sprd```
+
 
 - [URL] is similar to this: ```jdbc:postgresql://localhost:5432/database_name``` 
 - ```-Sprd``` flag means that application will run in production mode and use pgsql database instead of H2 module.
